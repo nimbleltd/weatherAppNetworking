@@ -8,6 +8,20 @@
 
 import UIKit
 
+extension CurrentWeather {
+    var tempuratureString: String{
+        return "\(Int(tempurature))º"
+    }
+    var humidityString: String{
+        let percentageValue = Int(humidity * 100)
+        return "\(Int(percentageValue))%"
+    }
+    var precipitationProbabilityString: String{
+        let precipitationPercent = Int(precipitationProbability * 100)
+        return "\(Int(precipitationPercent))%"
+    }
+}
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var currentTemperatureLabel: UILabel!
@@ -17,6 +31,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentSummaryLabel: UILabel!
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
 
     override func viewDidLoad() {
@@ -35,9 +50,11 @@ class ViewController: UIViewController {
     }
 
     func display(weather: CurrentWeather) {
-        currentTemperatureLabel.text = "\(weather.tempurature)"
-        currentHumidityLabel.text = "\(weather.humidity*100)%"
-        currentPrecipitationLabel.text = "\(weather.precipitationProbability*100)%"
+        currentTemperatureLabel.text = weather.tempuratureString
+        currentHumidityLabel.text = weather.humidityString
+        currentPrecipitationLabel.text = weather.precipitationProbabilityString
+        currentSummaryLabel.text = weather.summary
+        currentWeatherIcon.image = weather.icon
     }
 
 }
